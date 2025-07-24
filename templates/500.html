@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}Erreur interne{% endblock title %}
+
+{% block content %}
+<div class="container text-center py-5">
+    <h1>500 - Erreur interne du serveur</h1>
+    <p>Nous rencontrons actuellement des difficultés techniques. Veuillez réessayer plus tard.</p>
+    <a href="{% url 'index' %}" class="btn btn-primary">Retour à l'accueil</a>
+</div>
+{% endblock %}
