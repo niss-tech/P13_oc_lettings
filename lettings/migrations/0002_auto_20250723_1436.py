@@ -31,5 +31,5 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.RunPython(copy_lettings_data),
+        # migrations.RunPython(copy_lettings_data),
     ]

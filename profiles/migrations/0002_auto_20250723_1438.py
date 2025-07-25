@@ -23,6 +23,6 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.RunPython(copy_profiles_data),
+        # migrations.RunPython(copy_profiles_data),
     ]
 
