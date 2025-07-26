@@ -70,3 +70,11 @@ def test_letting_not_found(client):
 
     # Vérifie que le code retourné est bien une erreur 404
     assert response.status_code == 404
+
+
+def test_homepage_view(client):
+    url = reverse('index')
+    response = client.get(url)
+
+    assert response.status_code == 200
+    assert b"Welcome" in response.content
