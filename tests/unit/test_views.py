@@ -36,7 +36,7 @@ def test_lettings_index_view(client):
         zip_code="06000",
         country_iso_code="FRA"
     )
-    
+
     letting = Letting.objects.create(title="Maison test", address=address)
 
     # Appel de la vue
