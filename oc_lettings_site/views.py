@@ -13,4 +13,3 @@ def index(request):
 # Vue de test temporaire pour déclencher une erreur 500
 # def test_500(request):
 #     1 / 0  # crash volontaire
-

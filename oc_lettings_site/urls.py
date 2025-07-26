@@ -9,8 +9,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
 ]
-
-
-    # path('test-404/', views.test_404),
-    # path('test-500/', views.test_500),
-    # path('sentry-debug/', views.trigger_error),
+# path('test-404/', views.test_404),
+# path('test-500/', views.test_500),
+# path('sentry-debug/', views.trigger_error),
