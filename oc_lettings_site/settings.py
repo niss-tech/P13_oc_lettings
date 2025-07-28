@@ -4,7 +4,6 @@ from sentry_sdk.integrations.django import DjangoIntegration
 from pathlib import Path
 import json
 from dotenv import load_dotenv
-import logging.config
 
 
 load_dotenv()
