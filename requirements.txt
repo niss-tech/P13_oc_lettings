@@ -7,3 +7,5 @@ sentry-sdk
 six
 whitenoise
 python-dotenv
+sphinx
+sphinx-rtd-theme
