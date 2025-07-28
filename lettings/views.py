@@ -2,15 +2,36 @@ from django.shortcuts import render, get_object_or_404
 from lettings.models import Letting
 
 
-# Récupère tous les logements disponibles pour la page des lettings
-def lettings_index(request):
+def index(request):
+    """
+    Vue de la page d'accueil des lettings.
+
+    Affiche la liste des logements disponibles.
+
+    Args:
+        request (HttpRequest): La requête HTTP.
+
+    Returns:
+        HttpResponse: La page HTML contenant les logements.
+    """
     lettings_list = Letting.objects.all()
     context = {'lettings_list': lettings_list}
-    return render(request, 'lettings/lettings_index.html', context)
+    return render(request, 'lettings/index.html', context)
 
 
-# Affiche les détails d’un logement en fonction de son ID
 def letting(request, letting_id):
+    """
+    Vue de détail d’un logement.
+
+    Affiche les infos d’un logement à partir de son identifiant.
+
+    Args:
+        request (HttpRequest): La requête HTTP.
+        letting_id (int): ID du logement.
+
+    Returns:
+        HttpResponse: La page HTML contenant le logement.
+    """
     letting = get_object_or_404(Letting, id=letting_id)
     context = {
         'title': letting.title,

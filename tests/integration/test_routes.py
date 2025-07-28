@@ -11,13 +11,13 @@ def test_user_profile_flow(client):
     Profile.objects.create(user=user, favorite_city="Toulouse")
 
     # Accès à la page /profiles/ qui vérifie que l'utilisateur est présent
-    list_url = reverse('profiles_index')
+    list_url = reverse('profiles:index')
     response_list = client.get(list_url)
     assert response_list.status_code == 200
     assert user.username.encode() in response_list.content
 
     # Accès au détails du profil via /profiles/<username>/
-    detail_url = reverse('profile', kwargs={'username': user.username})
+    detail_url = reverse('profiles:profile', kwargs={'username': user.username})
     response_detail = client.get(detail_url)
     assert response_detail.status_code == 200
     assert b"Toulouse" in response_detail.content

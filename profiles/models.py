@@ -3,11 +3,18 @@ from django.contrib.auth.models import User
 
 
 class Profile(models.Model):
-    # L'utilisateur associé à ce profil
+    """
+    Représente un profil utilisateur, lié à un utilisateur Django.
+
+    Attributs :
+        user (User) : L'utilisateur lié au profil.
+        favorite_city (str) : Ville préférée (optionnelle).
+    """
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    # La ville préférée de l'utilisateur (champ optionnel)
     favorite_city = models.CharField(max_length=64, blank=True)
 
     def __str__(self):
-        # Affiche le nom d'utilisateur dans l'interface admin
+        """
+        Retourne une représentation textuelle du profil (le nom d'utilisateur).
+        """
         return self.user.username
