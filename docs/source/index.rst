@@ -18,6 +18,7 @@ OC Lettings - Documentation
    interface
    utilisation
    deploiement
+   sentry
 
 
 
