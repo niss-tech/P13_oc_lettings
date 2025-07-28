@@ -4,6 +4,8 @@ from sentry_sdk.integrations.django import DjangoIntegration
 from pathlib import Path
 import json
 from dotenv import load_dotenv
+import logging.config
+
 
 load_dotenv()
 
@@ -124,11 +126,44 @@ STATICFILES_DIRS = [BASE_DIR / "static", ]
 # Si DEBUG = False , ca permet d'activer sentry uniquement en production
 if not DEBUG:
     sentry_sdk.init(
-        dsn=(
-            "https://4e76243247373b54dcc39b36befec5c5@"
-            "o4509668618141696.ingest.de.sentry.io/4509734324273232"
-        ),
+        dsn=os.environ.get("SENTRY_DSN"),
         integrations=[DjangoIntegration()],
         traces_sample_rate=1.0,
         send_default_pii=True
     )
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '[{levelname}] {asctime} {name} : {message}',
+            'style': '{',
+        },
+        'simple': {
+            'format': '[{levelname}] {message}',
+            'style': '{',
+        },
+    },
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose',
+        },
+        'sentry': {
+            'class': 'sentry_sdk.integrations.logging.EventHandler',
+            'level': 'ERROR',
+        },
+    },
+    'root': {
+        'level': 'INFO',
+        'handlers': ['console', 'sentry'],
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+            'level': 'INFO',
+            'propagate': False,
+        },
+    },
+}

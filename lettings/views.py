@@ -1,5 +1,8 @@
 from django.shortcuts import render, get_object_or_404
 from lettings.models import Letting
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 def index(request):
@@ -15,6 +18,7 @@ def index(request):
         HttpResponse: La page HTML contenant les logements.
     """
     lettings_list = Letting.objects.all()
+    logger.info("Chargement de la page index des lettings avec %d logements.", len(lettings_list))
     context = {'lettings_list': lettings_list}
     return render(request, 'lettings/index.html', context)
 
@@ -33,6 +37,7 @@ def letting(request, letting_id):
         HttpResponse: La page HTML contenant le logement.
     """
     letting = get_object_or_404(Letting, id=letting_id)
+    logger.info("Accès au détail du letting id %d : %s", letting.id, letting.title)
     context = {
         'title': letting.title,
         'address': letting.address,
