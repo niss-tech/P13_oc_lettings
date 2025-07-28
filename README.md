@@ -73,5 +73,36 @@ Dans le reste de la documentation sur le développement local, il est supposé q
 
 Utilisation de PowerShell, comme ci-dessus sauf :
 
-- Pour activer l'environnement virtuel, `.\venv\Scripts\Activate.ps1` 
+- Pour activer l'environnement virtuel, `.env\Scripts\Activate.ps1` 
 - Remplacer `which <my-command>` par `(Get-Command <my-command>).Path`
+
+## Déploiement
+
+Le site OC Lettings est déployé automatiquement grâce à un pipeline CI/CD configuré via **GitHub Actions** et hébergé sur **Render**.
+
+### CI/CD avec GitHub Actions
+
+Le fichier de configuration se trouve dans `.github/workflows/cicd.yml`.
+
+À chaque `push` ou `pull request` sur la branche `master`, les étapes suivantes sont exécutées :
+
+1. **Installation des dépendances**
+2. **Vérification du style de code** (`flake8`)
+3. **Tests automatisés + couverture avec `pytest`**
+4. **Connexion à Docker Hub**
+5. **Construction et push de l’image Docker**
+6. **Déploiement automatique via webhook Render**
+
+### Tester une image Docker localement
+
+- Remplacez `<docker-username>` et `<repository-name>` par vos infos Docker Hub
+
+```bash
+docker pull <docker-username>/<repository-name>:latest
+docker run -p 8000:8000 <docker-username>/<repository-name>:latest
+```
+
+### Accès en production
+
+Le site est accessible à l’adresse :  
+https://p13-oc-lettings.onrender.com/
